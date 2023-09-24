@@ -71,3 +71,5 @@ with open(path+'alacritty.bak','w') as alacrittyBackUp:
 # WRITING THE CONFIG alacritty.yml FILE FOR ALACRITTY
 with open(path+'alacritty.yml','w') as alacrittyFile:
     alacrittyFile.writelines(alacrittyContents)
+
+os.system(f"nitrogen --set-scaled {image}")

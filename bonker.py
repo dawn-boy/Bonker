@@ -2,10 +2,15 @@
 from colorthief import ColorThief
 import os
 from random import randint
+from pprint import pprint
+
 
 # CHOSES A RANDOM IMAGE.
-randomInt = randint(0,18)
-image = '/home/Dew/Pictures/.walls/{}.jpg'.format(randomInt)
+path = '/home/Dew/Pictures/.walls/'
+fileCount = len(os.listdir(path))-1
+print(fileCount)
+randomInt = randint(0,fileCount)
+image = path+'{}.jpg'.format(randomInt)
 
 # ---FUNCTIONS---
 def colorGen(image):

@@ -24,6 +24,20 @@ def lineFinder(searchStr,file):
     for index,line in enumerate(file):
         if searchStr in line:
             return index
+def colorIntensity(hexList):
+    intensityList = []
+    for hex in hexList:
+        r = int(hex[0:2],16)
+        g = int(hex[2:4],16)
+        b = int(hex[4:6],16)
+
+        luma = ( 0.2126 * r ) + ( 0.7152 * g ) + ( 0.0722 * b )
+
+        if luma > 128 :
+            intensityList.append(hexList[0])
+        else:
+            intensityList.append(hexList[-1])
+    return intensityList
 
 # GENERATES A COLOR(HEXADECIMAL) LIST.
 colorList = colorGen(image)
@@ -41,9 +55,11 @@ qtileBackUp = qtileContents.copy()
 if 'global' in qtileContents[0]:
     qtileContents.pop(0)
     qtileContents.pop(0)
+    qtileContents.pop(0)
 
 # PREPARING THE DATA.
-finalQtileContents = ["global colors\ncolors = {}\n".format(hexList)]
+intensityList = colorIntensity(hexList)
+finalQtileContents = ["global bgColors, fgColors\nbgColors = {}\nfgColors = {}\n".format(hexList,intensityList)]
 finalQtileContents.extend(qtileContents)
 
 # WRITING THE config.bak FILE FOR QTILE.

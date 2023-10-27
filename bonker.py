@@ -8,9 +8,12 @@ from pprint import pprint
 # CHOSES A RANDOM IMAGE.
 path = '/home/Dew/Pictures/.walls/'
 fileCount = len(os.listdir(path))-1
-print(fileCount)
 randomInt = randint(0,fileCount)
-image = path+'{}.jpg'.format(randomInt)
+ image = path+'{}.jpg'.format(randomInt)
+
+# ---CHOSEN IMAGE---  
+with open('.image.chosen','w') as file:
+    file.write('{}'.format(randomInt))
 
 # ---FUNCTIONS---
 def colorGen(image):

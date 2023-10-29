@@ -9,7 +9,10 @@ from pprint import pprint
 path = '/home/Dew/Pictures/.walls/'
 fileCount = len(os.listdir(path))-1
 randomInt = randint(0,fileCount)
- image = path+'{}.jpg'.format(randomInt)
+
+randomInt = 12
+
+image = path+'{}.jpg'.format(randomInt)
 
 # ---CHOSEN IMAGE---  
 with open('.image.chosen','w') as file:

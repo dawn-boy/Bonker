@@ -3,6 +3,7 @@ from colorthief import ColorThief
 import os
 from random import randint
 from pprint import pprint
+import colorsys
 
 
 # CHOSES A RANDOM IMAGE.
@@ -10,12 +11,10 @@ path = '/home/Dew/Pictures/.walls/'
 fileCount = len(os.listdir(path))-1
 randomInt = randint(0,fileCount)
 
-randomInt = 12
-
 image = path+'{}.jpg'.format(randomInt)
 
 # ---CHOSEN IMAGE---  
-with open('.image.chosen','w') as file:
+with open('/home/Dew/.image.chosen','w') as file:
     file.write('{}'.format(randomInt))
 
 # ---FUNCTIONS---
@@ -29,7 +28,8 @@ def hexer(colorList):
     for index in range(len(rgbSumList)):
         rgbDict[rgbSumList[index]] = colorList[index]
     sortedRBGList = sorted(rgbDict.items())
-    hexList = ["{:02x}{:02x}{:02x}".format(rgbVal[0], rgbVal[1], rgbVal[2]) for rgbSum, rgbVal in sortedRBGList]
+    sortedRBGList = sorted(rgbDict.items())
+    hexList = ["{:02x}{:02x}{:02x}".format(rgbVal[0], rgbVal[1], rgbVal[2])  for rgbSum, rgbVal in sortedRBGList]
     return hexList  
 def lineFinder(searchStr,file):
     for index,line in enumerate(file):
@@ -50,9 +50,21 @@ def colorIntensity(hexList):
             intensityList.append(hexList[-1])
     return intensityList
 
+def backgroundDarker(hexList):
+    color = [int(hexList[0][0:2],16),int(hexList[0][2:4],16),int(hexList[0][4:6],16)]
+
+    hsv = list(colorsys.rgb_to_hsv(color[0],color[1],color[2]))
+    hsv[2] *= 30/100
+    hsv[1] = 1
+    print(hsv)
+    rgb = colorsys.hsv_to_rgb(hsv[0],hsv[1],hsv[2])
+    return ("{:02x}{:02x}{:02x}".format(int(rgb[0]),int(rgb[1]),int(rgb[2])))
+
 # GENERATES A COLOR(HEXADECIMAL) LIST.
 colorList = colorGen(image)
 hexList = hexer(colorList)
+hexList[0] = backgroundDarker(hexList)
+
 
 # READS THE config.py FILE FOR QTILE.
 path = '/home/Dew/.config/qtile/'

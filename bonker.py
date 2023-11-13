@@ -7,7 +7,7 @@ import colorsys
 
 
 # CHOSES A RANDOM IMAGE.
-path = '/home/Dew/Pictures/.walls/'
+path = '/home/Dew/.github/walls/.walls/'
 fileCount = len(os.listdir(path))-1
 randomInt = randint(0,fileCount)
 

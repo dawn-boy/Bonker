@@ -1,5 +1,3 @@
-So Let's Bonk!
-
 # Prerequisite
 - This tool expects a few things to start with:
     - A Collection of walls at ~/Pictures/.walls, named {0-n}.jpg,
